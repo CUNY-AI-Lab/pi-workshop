@@ -15,7 +15,7 @@ test("resolveAgentDir defaults to ~/.pi/agent", () => {
 
 test("resolveAgentDir honors PI_CODING_AGENT_DIR including a ~ prefix", () => {
   assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "/custom/agent" }, "/home/jane"), resolve("/custom/agent"));
-  assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "~/alt/agent" }, "/home/jane"), join("/home/jane", "alt", "agent"));
+  assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "~/alt/agent" }, "/home/jane"), resolve("/home/jane", "alt", "agent"));
 });
 
 test("applyWindowsDefaultTools creates settings.json when absent", () => {
