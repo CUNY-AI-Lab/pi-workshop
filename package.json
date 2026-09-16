@@ -1,0 +1,66 @@
+{
+  "name": "@cuny-ai-lab/pi-workshop",
+  "version": "0.1.0",
+  "description": "CUNY AI Lab workshop setup and model provider for Pi",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "pi-workshop": "./bin/setup.mjs"
+  },
+  "files": [
+    "bin",
+    "extensions",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "keywords": [
+    "pi-package",
+    "cuny",
+    "cuny-ai-lab",
+    "ai",
+    "coding-agent"
+  ],
+  "pi": {
+    "extensions": [
+      "./extensions/cail.ts"
+    ]
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec \"test/**/*.test.mjs\" \"test/**/*.test.ts\"",
+    "test:live": "CAIL_LIVE_TEST=1 node --test test/live/*.test.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.2"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-ai": {
+      "optional": true
+    },
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "^0.85.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CUNY-AI-Lab/pi-workshop.git"
+  },
+  "homepage": "https://github.com/CUNY-AI-Lab/pi-workshop#readme",
+  "bugs": {
+    "url": "https://github.com/CUNY-AI-Lab/pi-workshop/issues"
+  }
+}
