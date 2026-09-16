@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { mkdtempSync, readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { resolveAgentDir, applyWindowsDefaultTools, WINDOWS_DEFAULT_TOOLS } from "../src/settings.mjs";
 
 function scratch() {
@@ -14,7 +14,7 @@ test("resolveAgentDir defaults to ~/.pi/agent", () => {
 });
 
 test("resolveAgentDir honors PI_CODING_AGENT_DIR including a ~ prefix", () => {
-  assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "/custom/agent" }, "/home/jane"), "/custom/agent");
+  assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "/custom/agent" }, "/home/jane"), resolve("/custom/agent"));
   assert.equal(resolveAgentDir({ PI_CODING_AGENT_DIR: "~/alt/agent" }, "/home/jane"), join("/home/jane", "alt", "agent"));
 });
 
