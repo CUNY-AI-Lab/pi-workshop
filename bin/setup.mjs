@@ -2,8 +2,8 @@
 /**
  * CUNY AI Lab × Pi workshop installer.
  *
- *   npx @cuny-ai-lab/pi-workshop            (macOS / Linux)
- *   npx.cmd @cuny-ai-lab/pi-workshop        (Windows PowerShell)
+ *   npx @cuny-ai-lab/cail-pi            (macOS / Linux)
+ *   npx.cmd @cuny-ai-lab/cail-pi        (Windows PowerShell)
  *
  * Wires real platform services into the orchestrator in ../src/setup.mjs.
  */
@@ -86,7 +86,7 @@ async function main(argv) {
 }
 
 const invokedDirectly = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
-if (invokedDirectly || process.argv[1]?.endsWith("pi-workshop")) {
+if (invokedDirectly || process.argv[1]?.endsWith("cail-pi")) {
   main(process.argv.slice(2)).then(
     (code) => {
       process.exitCode = code;

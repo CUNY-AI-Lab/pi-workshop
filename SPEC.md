@@ -4,7 +4,7 @@
 
 Build and publish a single npm package:
 
-`@cuny-ai-lab/pi-workshop`
+`@cuny-ai-lab/cail-pi`
 
 The package has two roles:
 
@@ -16,13 +16,13 @@ The desired participant experience should be extremely simple.
 ### macOS / Linux
 
 ```bash
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 ```
 
 ### Windows PowerShell
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ```
 
 The installer should then interactively do the rest:
@@ -74,13 +74,13 @@ The API key must not appear in terminal history, logs, error messages, or proces
 Build one npm package:
 
 ```text
-@cuny-ai-lab/pi-workshop
+@cuny-ai-lab/cail-pi
 ```
 
 That package contains:
 
 ```text
-pi-workshop/
+cail-pi/
 ├── package.json
 ├── README.md
 ├── LICENSE
@@ -171,13 +171,13 @@ Start with approximately:
 
 ```json
 {
-  "name": "@cuny-ai-lab/pi-workshop",
+  "name": "@cuny-ai-lab/cail-pi",
   "version": "0.1.0",
   "description": "CUNY AI Lab workshop setup and model provider for Pi",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "pi-workshop": "./bin/setup.mjs"
+    "cail-pi": "./bin/setup.mjs"
   },
   "files": [
     "bin",
@@ -240,7 +240,7 @@ START
   │
   ├── verify Pi
   │
-  ├── install @cuny-ai-lab/pi-workshop into Pi
+  ├── install @cuny-ai-lab/cail-pi into Pi
   │
   ├── configure Windows PowerShell support if relevant
   │
@@ -836,7 +836,7 @@ If `--skip-lazypi` is supplied, require that Pi already exists.
 After LazyPi:
 
 ```text
-pi install npm:@cuny-ai-lab/pi-workshop
+pi install npm:@cuny-ai-lab/cail-pi
 ```
 
 On Windows invoke:
@@ -935,7 +935,7 @@ or equivalent.
 Workshop instructions should use:
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ```
 
 This avoids PowerShell selecting an npm-generated `.ps1` wrapper that may be blocked by policy.
@@ -1395,7 +1395,7 @@ Close and reopen PowerShell afterward.
 ## Step 2 — Run workshop setup
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ```
 
 The installer will ask:
@@ -1437,7 +1437,7 @@ node --version
 Run:
 
 ```bash
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 ```
 
 Enter the CAIL API key when prompted.
@@ -1462,7 +1462,7 @@ Same basic flow:
 
 ```bash
 node --version
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 pi
 ```
 
@@ -1761,13 +1761,13 @@ The installer can optionally detect an old installed version and offer to update
 Document:
 
 ```text
-pi remove npm:@cuny-ai-lab/pi-workshop
+pi remove npm:@cuny-ai-lab/cail-pi
 ```
 
 Windows:
 
 ```powershell
-pi.cmd remove npm:@cuny-ai-lab/pi-workshop
+pi.cmd remove npm:@cuny-ai-lab/cail-pi
 ```
 
 Do not delete the user's other Pi packages.
@@ -1804,13 +1804,13 @@ Set up Pi for the CUNY AI Lab workshop.
 ## Windows PowerShell
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ````
 
 ## macOS / Linux
 
 ```bash
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 ```
 
 The installer will:
@@ -1885,7 +1885,7 @@ diagnostics
 The implementation is complete when the following experience works on a clean Windows 11 machine with Node >=22.19:
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ```
 
 The participant gets LazyPi.
@@ -1945,7 +1945,7 @@ Changing the CAIL model roster does not require republishing the npm package.
 The same package works on macOS with:
 
 ```bash
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 ```
 
 and Linux with the same command.

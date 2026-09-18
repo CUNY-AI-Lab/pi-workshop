@@ -229,3 +229,34 @@ test("--uninstall removes the package and keeps the key unless confirmed", async
   assert.ok(!h.calls.some((c) => c.name === "credentials.remove"));
   assert.match(h.text(), /kept/i);
 });
+
+test("setup replaces the earlier pi-workshop package so the provider is never loaded twice", async () => {
+  const h = makeDeps({ pi: { legacy: true } });
+  const result = await runSetup(parseArgs([]), h.deps);
+  assert.equal(result.exitCode, 0);
+  const names = h.calls.map((c) => c.name);
+  assert.ok(names.indexOf("pi.removeLegacy") > names.indexOf("pi.install"), "legacy package is removed only after the new one is in");
+  assert.match(h.text(), /pi-workshop/);
+});
+
+test("setup leaves Pi's packages alone when the earlier package is absent", async () => {
+  const h = makeDeps();
+  await runSetup(parseArgs([]), h.deps);
+  assert.ok(!h.calls.some((c) => c.name === "pi.removeLegacy"));
+});
+
+test("a failed removal of the earlier package is a warning with the manual command, not a failed setup", async () => {
+  const h = makeDeps({ pi: { legacy: true, removeLegacyPackage: () => ({ status: 1 }) } });
+  const result = await runSetup(parseArgs([]), h.deps);
+  assert.equal(result.exitCode, 0);
+  assert.match(h.text(), /pi remove npm:@cuny-ai-lab\/pi-workshop/);
+});
+
+test("--uninstall also removes the earlier pi-workshop package when present", async () => {
+  const h = makeDeps({ pi: { legacy: true } });
+  const { runUninstall } = await import("../src/setup.mjs");
+  const result = await runUninstall(h.deps);
+  assert.equal(result.exitCode, 0);
+  assert.ok(h.calls.some((c) => c.name === "pi.remove"));
+  assert.ok(h.calls.some((c) => c.name === "pi.removeLegacy"));
+});

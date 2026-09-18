@@ -26,6 +26,9 @@ export function makeDeps(overrides = {}) {
       installWorkshopPackage() { calls.push({ name: "pi.install" }); return { status: 0 }; },
       removeWorkshopPackage() { calls.push({ name: "pi.remove" }); return { status: 0 }; },
       hasWorkshopPackage() { return true; },
+      legacy: false,
+      hasLegacyPackage() { return this.legacy; },
+      removeLegacyPackage() { calls.push({ name: "pi.removeLegacy" }); this.legacy = false; return { status: 0 }; },
       listModels() { calls.push({ name: "pi.listModels" }); return ["gemma-3-12b-it", "gpt-oss-120b"]; },
     },
     prompts: {

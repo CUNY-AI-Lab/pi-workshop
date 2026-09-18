@@ -6,7 +6,7 @@ import { join, resolve } from "node:path";
 import { resolveAgentDir, applyWindowsDefaultTools, WINDOWS_DEFAULT_TOOLS } from "../src/settings.mjs";
 
 function scratch() {
-  return mkdtempSync(join(tmpdir(), "pi-workshop-settings-"));
+  return mkdtempSync(join(tmpdir(), "cail-pi-settings-"));
 }
 
 test("resolveAgentDir defaults to ~/.pi/agent", () => {

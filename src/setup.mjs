@@ -7,6 +7,7 @@
  * never part of an error message.
  */
 import { checkNodeVersion } from "./preflight.mjs";
+import { LEGACY_PACKAGE_SOURCE } from "./pi.mjs";
 import { executable, platformLabel } from "./platform.mjs";
 import { RULE, banner, fail, indentLines, ok, warn } from "./ui.mjs";
 
@@ -167,6 +168,19 @@ function describeUnexpected(error) {
   return message.length > 120 ? `${message.slice(0, 117)}...` : message;
 }
 
+/** Removes the package's earlier name. Both register the `cail` provider, so only one may stay. */
+function removeLegacyPackage(deps, successMessage) {
+  const { out } = deps;
+  if (!deps.pi.hasLegacyPackage()) return;
+  const result = deps.pi.removeLegacyPackage();
+  if (result.error || result.status !== 0) {
+    out(warn("The earlier pi-workshop package could not be removed. Remove it yourself with:"));
+    out(`  ${piCommand(deps)} remove ${LEGACY_PACKAGE_SOURCE}`);
+    return;
+  }
+  out(ok(successMessage));
+}
+
 function refreshModels(deps) {
   const { out } = deps;
   out("");
@@ -254,6 +268,7 @@ export async function runSetup(options, deps) {
     return { exitCode: 1, stage: "install" };
   }
   out(ok("CAIL provider installed"));
+  removeLegacyPackage(deps, "Earlier pi-workshop package replaced");
 
   if (deps.platform === "win32") {
     out(ok("PowerShell detected"));
@@ -295,6 +310,7 @@ export async function runUninstall(deps) {
     return { exitCode: 1 };
   }
   out(ok("CUNY AI Lab package removed from Pi"));
+  removeLegacyPackage(deps, "Earlier pi-workshop package removed from Pi");
   if (credentials.status().state === "configured") {
     out("");
     const remove = await prompts.confirmRemoveKey();

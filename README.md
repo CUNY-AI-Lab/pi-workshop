@@ -5,13 +5,13 @@ Set up [Pi](https://pi.dev) for the CUNY AI Lab workshop.
 ## Windows PowerShell
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop
+npx.cmd @cuny-ai-lab/cail-pi
 ```
 
 ## macOS / Linux
 
 ```bash
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 ```
 
 The installer will:
@@ -78,7 +78,7 @@ Install Node.js 22.19 or newer with your distribution's package manager, [nvm](h
 2. Run the workshop setup:
 
    ```powershell
-   npx.cmd @cuny-ai-lab/pi-workshop
+   npx.cmd @cuny-ai-lab/cail-pi
    ```
 
    LazyPi will offer to install Pi and a curated set of packages. Accept the defaults.
@@ -99,7 +99,7 @@ No `/login` is needed. Setup already stored your key in Pi.
 
 ```bash
 node --version
-npx @cuny-ai-lab/pi-workshop
+npx @cuny-ai-lab/cail-pi
 pi
 ```
 
@@ -123,11 +123,11 @@ Running the installer again is safe. It confirms Pi, updates the CUNY AI Lab pac
 Run the health check first:
 
 ```powershell
-npx.cmd @cuny-ai-lab/pi-workshop --doctor     # Windows
+npx.cmd @cuny-ai-lab/cail-pi --doctor     # Windows
 ```
 
 ```bash
-npx @cuny-ai-lab/pi-workshop --doctor         # macOS / Linux
+npx @cuny-ai-lab/cail-pi --doctor         # macOS / Linux
 ```
 
 It reports platform, Node, npm, Pi, the CUNY AI Lab extension, whether a key is saved, whether the gateway is reachable, whether the saved key is accepted, how many models are available, and (on Windows) whether Pi's PowerShell tool is enabled. It never prints the key.
@@ -176,21 +176,25 @@ The list of CUNY AI Lab models comes live from the gateway each time Pi starts, 
 Update the package itself with Pi's normal mechanism:
 
 ```text
-pi update npm:@cuny-ai-lab/pi-workshop
+pi update npm:@cuny-ai-lab/cail-pi
 ```
 
 or re-run the installer.
 
+### Renamed from `@cuny-ai-lab/pi-workshop`
+
+This package was first published as `@cuny-ai-lab/pi-workshop`. If you installed that one, run the installer above once: it installs `@cuny-ai-lab/cail-pi` and removes the old package, so the CUNY AI Lab provider is not loaded twice. Your saved key is kept.
+
 ## Uninstall
 
 ```text
-pi remove npm:@cuny-ai-lab/pi-workshop
+pi remove npm:@cuny-ai-lab/cail-pi
 ```
 
 Windows:
 
 ```powershell
-pi.cmd remove npm:@cuny-ai-lab/pi-workshop
+pi.cmd remove npm:@cuny-ai-lab/cail-pi
 ```
 
 This removes only this package. Your other Pi packages are untouched, and **your saved CUNY AI Lab key is kept** in Pi's credential store. To remove the key too, run the installer with `--uninstall`; it asks `Remove your saved CUNY AI Lab API key from Pi? [y/N]` (default: no). You can also remove it from inside Pi with `/logout`.

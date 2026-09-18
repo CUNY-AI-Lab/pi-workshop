@@ -16,7 +16,7 @@ import {
 const FAKE_KEY = "cail-test-super-secret-12345";
 
 function scratch() {
-  return mkdtempSync(join(tmpdir(), "pi-workshop-auth-"));
+  return mkdtempSync(join(tmpdir(), "cail-pi-auth-"));
 }
 
 test("readCredentialStatus reports absent, missing, configured and malformed without exposing secrets", () => {

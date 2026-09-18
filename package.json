@@ -1,11 +1,11 @@
 {
-  "name": "@cuny-ai-lab/pi-workshop",
-  "version": "0.1.1",
+  "name": "@cuny-ai-lab/cail-pi",
+  "version": "0.2.0",
   "description": "CUNY AI Lab workshop setup and model provider for Pi",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "pi-workshop": "bin/setup.mjs"
+    "cail-pi": "bin/setup.mjs"
   },
   "files": [
     "bin",
@@ -57,10 +57,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CUNY-AI-Lab/pi-workshop.git"
+    "url": "git+https://github.com/CUNY-AI-Lab/cail-pi.git"
   },
-  "homepage": "https://github.com/CUNY-AI-Lab/pi-workshop#readme",
+  "homepage": "https://github.com/CUNY-AI-Lab/cail-pi#readme",
   "bugs": {
-    "url": "https://github.com/CUNY-AI-Lab/pi-workshop/issues"
+    "url": "https://github.com/CUNY-AI-Lab/cail-pi/issues"
   }
 }

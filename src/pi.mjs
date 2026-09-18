@@ -3,8 +3,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { captureCommand, runCommand } from "./platform.mjs";
 
-export const WORKSHOP_PACKAGE_NAME = "@cuny-ai-lab/pi-workshop";
+export const WORKSHOP_PACKAGE_NAME = "@cuny-ai-lab/cail-pi";
 export const WORKSHOP_PACKAGE_SOURCE = `npm:${WORKSHOP_PACKAGE_NAME}`;
+/** The name this package was first published under; replaced on setup so the provider never loads twice. */
+export const LEGACY_PACKAGE_SOURCE = "npm:@cuny-ai-lab/pi-workshop";
 export const LAZYPI_PACKAGE = "@robzolkos/lazypi";
 
 export function parsePiVersion(output) {
@@ -59,6 +61,10 @@ export function isWorkshopPackageEntry(entry) {
   return false;
 }
 
+export function isLegacyPackageEntry(entry) {
+  return entry.source === LEGACY_PACKAGE_SOURCE || entry.source.startsWith(`${LEGACY_PACKAGE_SOURCE}@`);
+}
+
 /** Model ids for one provider from `pi --list-models` table output. */
 export function parseListModels(output, providerId) {
   const ids = [];
@@ -96,6 +102,12 @@ export function createPi({ capture = captureCommand, run = runCommand, platform 
     },
     hasWorkshopPackage() {
       return this.installedPackages()?.some(isWorkshopPackageEntry) ?? false;
+    },
+    hasLegacyPackage() {
+      return this.installedPackages()?.some(isLegacyPackageEntry) ?? false;
+    },
+    removeLegacyPackage() {
+      return run("pi", ["remove", LEGACY_PACKAGE_SOURCE], options);
     },
     /** Starts Pi headlessly so it loads packages, refreshes catalogs, and lists models. */
     listModels(providerId) {

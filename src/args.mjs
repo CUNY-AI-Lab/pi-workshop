@@ -1,8 +1,8 @@
 export const HELP_TEXT = `CUNY AI Lab × Pi workshop setup
 
 Usage:
-  npx @cuny-ai-lab/pi-workshop [options]        (macOS / Linux)
-  npx.cmd @cuny-ai-lab/pi-workshop [options]    (Windows PowerShell)
+  npx @cuny-ai-lab/cail-pi [options]        (macOS / Linux)
+  npx.cmd @cuny-ai-lab/cail-pi [options]    (Windows PowerShell)
 
 Options:
   --doctor               Check this computer without changing anything
