@@ -1,6 +1,6 @@
 {
   "name": "@cuny-ai-lab/pi-workshop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CUNY AI Lab workshop setup and model provider for Pi",
   "type": "module",
   "license": "MIT",

@@ -45,7 +45,12 @@ test("buildSpawnPlan on posix passes the argument array untouched without a shel
 
 test("buildSpawnPlan on win32 uses the .cmd shim and shell-safe quoting for paths with spaces", () => {
   const plan = buildSpawnPlan("pi", ["install", "C:\\Users\\Jane Doe\\pkg"], "win32");
-  assert.equal(plan.command, "pi.cmd");
-  assert.deepEqual(plan.args, ["install", '"C:\\Users\\Jane Doe\\pkg"']);
+  assert.equal(plan.command, 'pi.cmd install "C:\\Users\\Jane Doe\\pkg"');
   assert.equal(plan.shell, true);
+});
+
+test("buildSpawnPlan on win32 passes no argument array, so Node does not print DEP0190", () => {
+  const plan = buildSpawnPlan("pi", ["--version"], "win32");
+  assert.equal(plan.command, "pi.cmd --version");
+  assert.deepEqual(plan.args, []);
 });

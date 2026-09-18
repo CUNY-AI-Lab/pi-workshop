@@ -3,12 +3,16 @@
  *
  * All process launches go through `buildSpawnPlan` / `runCommand` so that:
  *  - Windows uses the npm-generated `.cmd` shims (npm.cmd, npx.cmd, pi.cmd)
- *  - arguments are always passed as arrays, never concatenated into a string
+ *  - callers always pass arguments as arrays; only this module builds a command line
  *
  * Windows note: Node.js (since the CVE-2024-27980 fix) refuses to spawn a
  * `.cmd`/`.bat` file without `shell: true`. That is the one place a shell is
  * demonstrably necessary, so on win32 the plan sets `shell: true` and quotes
  * every argument itself. No user-provided secret is ever passed as an argument.
+ *
+ * The quoted arguments are joined into the command string rather than handed
+ * to Node as an array: Node would concatenate them the same way, but prints a
+ * DEP0190 warning into the participant's terminal when it does.
  */
 import { spawn, spawnSync } from "node:child_process";
 import os from "node:os";
@@ -31,7 +35,8 @@ export function windowsShellArg(arg) {
 
 export function buildSpawnPlan(name, args = [], platform = process.platform) {
   if (platform === "win32") {
-    return { command: executable(name, platform), args: args.map(windowsShellArg), shell: true };
+    const command = [executable(name, platform), ...args.map(windowsShellArg)].join(" ");
+    return { command, args: [], shell: true };
   }
   return { command: name, args: [...args], shell: false };
 }
